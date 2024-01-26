@@ -16,22 +16,22 @@
   ******************************************************************************
   */
 /* USER CODE END Header */
-/* Includes ------------------------------------------------------------------*/
+/* Includes ------------------------------------------------------------------ */
 #include "main.h"
 #include "iwdg.h"
 #include "tim.h"
 
-/* Private includes ----------------------------------------------------------*/
+/* Private includes ---------------------------------------------------------- */
 /* USER CODE BEGIN Includes */
 
 /* USER CODE END Includes */
 
-/* Private typedef -----------------------------------------------------------*/
+/* Private typedef ----------------------------------------------------------- */
 /* USER CODE BEGIN PTD */
 
 /* USER CODE END PTD */
 
-/* Private define ------------------------------------------------------------*/
+/* Private define ------------------------------------------------------------ */
 /* USER CODE BEGIN PD */
 
 #ifndef HSEM_ID_0
@@ -40,23 +40,23 @@
 
 /* USER CODE END PD */
 
-/* Private macro -------------------------------------------------------------*/
+/* Private macro ------------------------------------------------------------- */
 /* USER CODE BEGIN PM */
 
 /* USER CODE END PM */
 
-/* Private variables ---------------------------------------------------------*/
+/* Private variables --------------------------------------------------------- */
 
 /* USER CODE BEGIN PV */
 
 /* USER CODE END PV */
 
-/* Private function prototypes -----------------------------------------------*/
+/* Private function prototypes ----------------------------------------------- */
 /* USER CODE BEGIN PFP */
 
 /* USER CODE END PFP */
 
-/* Private user code ---------------------------------------------------------*/
+/* Private user code --------------------------------------------------------- */
 /* USER CODE BEGIN 0 */
 
 /* USER CODE END 0 */
@@ -72,9 +72,9 @@ int main(void)
   /* USER CODE END 1 */
 
 /* USER CODE BEGIN Boot_Mode_Sequence_1 */
-  /*HW semaphore Clock enable*/
+  /* HW semaphore Clock enable */
   __HAL_RCC_HSEM_CLK_ENABLE();
-  /* Activate HSEM notification for Cortex-M4*/
+  /* Activate HSEM notification for Cortex-M4 */
   HAL_HSEM_ActivateNotification(__HAL_HSEM_SEMID_TO_MASK(HSEM_ID_0));
   /*
   Domain D2 goes to STOP mode (Cortex-M4 in deep-sleep) waiting for Cortex-M7 to
@@ -86,7 +86,7 @@ int main(void)
   __HAL_HSEM_CLEAR_FLAG(__HAL_HSEM_SEMID_TO_MASK(HSEM_ID_0));
 
 /* USER CODE END Boot_Mode_Sequence_1 */
-  /* MCU Configuration--------------------------------------------------------*/
+  /* MCU Configuration-------------------------------------------------------- */
 
   /* Reset of all peripherals, Initializes the Flash interface and the Systick. */
   HAL_Init();
@@ -114,7 +114,7 @@ int main(void)
 //    HAL_GPIO_TogglePin(LD1_GPIO_Port, LD1_Pin);
     HAL_GPIO_TogglePin(LD2_GPIO_Port, LD2_Pin);
     HAL_GPIO_TogglePin(LD3_GPIO_Port, LD3_Pin);
-    HAL_Delay(2111);
+    HAL_Delay(1123);
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */

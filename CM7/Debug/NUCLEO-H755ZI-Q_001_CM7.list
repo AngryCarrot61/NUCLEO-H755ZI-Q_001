@@ -950,11 +950,11 @@ __STATIC_FORCEINLINE void __DSB(void)
  8000980:	e000      	b.n	8000984 <main+0xcc>
     if (SCB->CCR & SCB_CCR_DC_Msk) return;  /* return if DCache is already enabled */
  8000982:	bf00      	nop
-  /* Enable D-Cache---------------------------------------------------------*/
+  /* Enable D-Cache--------------------------------------------------------- */
   SCB_EnableDCache();
 
 /* USER CODE BEGIN Boot_Mode_Sequence_1 */
-  /* Wait until CPU2 boots and enters in stop mode or timeout*/
+  /* Wait until CPU2 boots and enters in stop mode or timeout */
   timeout = 0xFFFF;
  8000984:	f64f 73ff 	movw	r3, #65535	; 0xffff
  8000988:	617b      	str	r3, [r7, #20]
@@ -979,7 +979,7 @@ __STATIC_FORCEINLINE void __DSB(void)
  80009a8:	f000 f91e 	bl	8000be8 <Error_Handler>
   }
 /* USER CODE END Boot_Mode_Sequence_1 */
-  /* MCU Configuration--------------------------------------------------------*/
+  /* MCU Configuration-------------------------------------------------------- */
 
   /* Reset of all peripherals, Initializes the Flash interface and the Systick. */
   HAL_Init();
@@ -998,7 +998,7 @@ __STATIC_FORCEINLINE void __DSB(void)
 /* USER CODE BEGIN Boot_Mode_Sequence_2 */
 /* When system initialization is finished, Cortex-M7 will release Cortex-M4 by means of
 HSEM notification */
-/*HW semaphore Clock enable*/
+/* HW semaphore Clock enable */
 __HAL_RCC_HSEM_CLK_ENABLE();
  80009b8:	4b20      	ldr	r3, [pc, #128]	; (8000a3c <main+0x184>)
  80009ba:	f8d3 30e0 	ldr.w	r3, [r3, #224]	; 0xe0
@@ -1014,7 +1014,7 @@ __HAL_RCC_HSEM_CLK_ENABLE();
 HAL_HSEM_FastTake(HSEM_ID_0);
  80009d6:	2000      	movs	r0, #0
  80009d8:	f000 fe96 	bl	8001708 <HAL_HSEM_FastTake>
-/*Release HSEM in order to notify the CPU2(CM4)*/
+/* Release HSEM in order to notify the CPU2(CM4) */
 HAL_HSEM_Release(HSEM_ID_0,0);
  80009dc:	2100      	movs	r1, #0
  80009de:	2000      	movs	r0, #0
@@ -1072,8 +1072,8 @@ Error_Handler();
  8000a24:	f44f 4180 	mov.w	r1, #16384	; 0x4000
  8000a28:	4805      	ldr	r0, [pc, #20]	; (8000a40 <main+0x188>)
  8000a2a:	f000 fe52 	bl	80016d2 <HAL_GPIO_TogglePin>
-    HAL_Delay(500);
- 8000a2e:	f44f 70fa 	mov.w	r0, #500	; 0x1f4
+    HAL_Delay(1000);
+ 8000a2e:	f44f 707a 	mov.w	r0, #1000	; 0x3e8
  8000a32:	f000 fb71 	bl	8001118 <HAL_Delay>
     HAL_GPIO_TogglePin(LD1_GPIO_Port, LD1_Pin);
  8000a36:	e7f1      	b.n	8000a1c <main+0x164>
@@ -1106,8 +1106,9 @@ void SystemClock_Config(void)
 
   /** Supply configuration update enable
   */
-  HAL_PWREx_ConfigSupply(PWR_LDO_SUPPLY);
- 8000a66:	2002      	movs	r0, #2
+//  HAL_PWREx_ConfigSupply(PWR_LDO_SUPPLY);             /* Wrong */
+  HAL_PWREx_ConfigSupply(PWR_DIRECT_SMPS_SUPPLY);	      /* Correct */
+ 8000a66:	2004      	movs	r0, #4
  8000a68:	f000 fe7c 	bl	8001764 <HAL_PWREx_ConfigSupply>
 
   /** Configure the main internal regulator output voltage

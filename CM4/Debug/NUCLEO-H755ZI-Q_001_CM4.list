@@ -126,7 +126,7 @@ int main(void)
   /* USER CODE END 1 */
 
 /* USER CODE BEGIN Boot_Mode_Sequence_1 */
-  /*HW semaphore Clock enable*/
+  /* HW semaphore Clock enable */
   __HAL_RCC_HSEM_CLK_ENABLE();
  810030e:	4b22      	ldr	r3, [pc, #136]	; (8100398 <main+0x90>)
  8100310:	f8d3 30e0 	ldr.w	r3, [r3, #224]	; 0xe0
@@ -138,7 +138,7 @@ int main(void)
  8100324:	f003 7300 	and.w	r3, r3, #33554432	; 0x2000000
  8100328:	607b      	str	r3, [r7, #4]
  810032a:	687b      	ldr	r3, [r7, #4]
-  /* Activate HSEM notification for Cortex-M4*/
+  /* Activate HSEM notification for Cortex-M4 */
   HAL_HSEM_ActivateNotification(__HAL_HSEM_SEMID_TO_MASK(HSEM_ID_0));
  810032c:	2001      	movs	r0, #1
  810032e:	f000 fb6f 	bl	8100a10 <HAL_HSEM_ActivateNotification>
@@ -174,7 +174,7 @@ int main(void)
  810036c:	f8c2 3114 	str.w	r3, [r2, #276]	; 0x114
 
 /* USER CODE END Boot_Mode_Sequence_1 */
-  /* MCU Configuration--------------------------------------------------------*/
+  /* MCU Configuration-------------------------------------------------------- */
 
   /* Reset of all peripherals, Initializes the Flash interface and the Systick. */
   HAL_Init();
@@ -201,8 +201,8 @@ int main(void)
  8100384:	f44f 4180 	mov.w	r1, #16384	; 0x4000
  8100388:	4807      	ldr	r0, [pc, #28]	; (81003a8 <main+0xa0>)
  810038a:	f000 fb27 	bl	81009dc <HAL_GPIO_TogglePin>
-    HAL_Delay(2111);
- 810038e:	f640 003f 	movw	r0, #2111	; 0x83f
+    HAL_Delay(1123);
+ 810038e:	f240 4063 	movw	r0, #1123	; 0x463
  8100392:	f000 fa07 	bl	81007a4 <HAL_Delay>
     HAL_GPIO_TogglePin(LD2_GPIO_Port, LD2_Pin);
  8100396:	e7f1      	b.n	810037c <main+0x74>

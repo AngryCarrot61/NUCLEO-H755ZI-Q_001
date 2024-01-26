@@ -16,7 +16,7 @@
   ******************************************************************************
   */
 /* USER CODE END Header */
-/* Includes ------------------------------------------------------------------*/
+/* Includes ------------------------------------------------------------------ */
 #include "main.h"
 #include "eth.h"
 #include "iwdg.h"
@@ -25,44 +25,44 @@
 #include "usb_otg.h"
 #include "gpio.h"
 
-/* Private includes ----------------------------------------------------------*/
+/* Private includes ---------------------------------------------------------- */
 /* USER CODE BEGIN Includes */
 
 /* USER CODE END Includes */
 
-/* Private typedef -----------------------------------------------------------*/
+/* Private typedef ----------------------------------------------------------- */
 /* USER CODE BEGIN PTD */
 
 /* USER CODE END PTD */
 
-/* Private define ------------------------------------------------------------*/
+/* Private define ------------------------------------------------------------ */
 /* USER CODE BEGIN PD */
 
 #ifndef HSEM_ID_0
-#define HSEM_ID_0 (0U) /* HW semaphore 0*/
+#define HSEM_ID_0 (0U) /* HW semaphore 0 */
 #endif
 
 /* USER CODE END PD */
 
-/* Private macro -------------------------------------------------------------*/
+/* Private macro ------------------------------------------------------------- */
 /* USER CODE BEGIN PM */
 
 /* USER CODE END PM */
 
-/* Private variables ---------------------------------------------------------*/
+/* Private variables --------------------------------------------------------- */
 
 /* USER CODE BEGIN PV */
 
 /* USER CODE END PV */
 
-/* Private function prototypes -----------------------------------------------*/
+/* Private function prototypes ----------------------------------------------- */
 void SystemClock_Config(void);
 void PeriphCommonClock_Config(void);
 /* USER CODE BEGIN PFP */
 
 /* USER CODE END PFP */
 
-/* Private user code ---------------------------------------------------------*/
+/* Private user code --------------------------------------------------------- */
 /* USER CODE BEGIN 0 */
 
 /* USER CODE END 0 */
@@ -80,14 +80,14 @@ int main(void)
   int32_t timeout;
 /* USER CODE END Boot_Mode_Sequence_0 */
 
-  /* Enable I-Cache---------------------------------------------------------*/
+  /* Enable I-Cache--------------------------------------------------------- */
   SCB_EnableICache();
 
-  /* Enable D-Cache---------------------------------------------------------*/
+  /* Enable D-Cache--------------------------------------------------------- */
   SCB_EnableDCache();
 
 /* USER CODE BEGIN Boot_Mode_Sequence_1 */
-  /* Wait until CPU2 boots and enters in stop mode or timeout*/
+  /* Wait until CPU2 boots and enters in stop mode or timeout */
   timeout = 0xFFFF;
   while((__HAL_RCC_GET_FLAG(RCC_FLAG_D2CKRDY) != RESET) && (timeout-- > 0));
   if ( timeout < 0 )
@@ -95,7 +95,7 @@ int main(void)
   Error_Handler();
   }
 /* USER CODE END Boot_Mode_Sequence_1 */
-  /* MCU Configuration--------------------------------------------------------*/
+  /* MCU Configuration-------------------------------------------------------- */
 
   /* Reset of all peripherals, Initializes the Flash interface and the Systick. */
   HAL_Init();
@@ -112,11 +112,11 @@ int main(void)
 /* USER CODE BEGIN Boot_Mode_Sequence_2 */
 /* When system initialization is finished, Cortex-M7 will release Cortex-M4 by means of
 HSEM notification */
-/*HW semaphore Clock enable*/
+/* HW semaphore Clock enable */
 __HAL_RCC_HSEM_CLK_ENABLE();
 /*Take HSEM */
 HAL_HSEM_FastTake(HSEM_ID_0);
-/*Release HSEM in order to notify the CPU2(CM4)*/
+/* Release HSEM in order to notify the CPU2(CM4) */
 HAL_HSEM_Release(HSEM_ID_0,0);
 /* wait until CPU2 wakes up from stop mode */
 timeout = 0xFFFF;
@@ -150,7 +150,7 @@ Error_Handler();
     HAL_GPIO_TogglePin(LD1_GPIO_Port, LD1_Pin);
 //    HAL_GPIO_TogglePin(LD2_GPIO_Port, LD2_Pin);
     HAL_GPIO_TogglePin(LD3_GPIO_Port, LD3_Pin);
-    HAL_Delay(500);
+    HAL_Delay(1000);
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
@@ -169,7 +169,8 @@ void SystemClock_Config(void)
 
   /** Supply configuration update enable
   */
-  HAL_PWREx_ConfigSupply(PWR_LDO_SUPPLY);
+//  HAL_PWREx_ConfigSupply(PWR_LDO_SUPPLY);             /* Wrong */
+  HAL_PWREx_ConfigSupply(PWR_DIRECT_SMPS_SUPPLY);	      /* Correct */
 
   /** Configure the main internal regulator output voltage
   */
