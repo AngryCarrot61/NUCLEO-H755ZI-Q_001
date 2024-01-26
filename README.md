@@ -26,7 +26,7 @@ Target no device found
 Error in initializing ST-LINK device.
 Reason: No device found on target.
 
-I tried several setting in STM32CubeMX, 5V external power, and suning ST-Link V3 probe.
+I tried several setting in STM32CubeMX, 5V external power, and using an ST-Link V3 probe.
 
 
 Solved:
