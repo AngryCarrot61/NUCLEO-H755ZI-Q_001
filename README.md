@@ -31,6 +31,9 @@ I tried several setting in STM32CubeMX, 5V external power, and using an ST-Link 
 
 Solved:
 
+With the help of Clive Turvey / Tesla DeLorean
+https://community.st.com/t5/stm32-mcus-boards-and-hardware/nucleo-h755zi-q-how-can-i-resolve-st-link-quot-no-device-found/td-p/632372#M16907
+
 void SystemClock_Config(void)
 {
   RCC_OscInitTypeDef RCC_OscInitStruct = {0};
